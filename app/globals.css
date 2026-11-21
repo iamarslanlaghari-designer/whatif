@@ -1,0 +1,1401 @@
+
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --whatif-orange: #ff6b35;
+  --whatif-surface: #f7f7f5;
+  --whatif-border: rgba(0, 0, 0, 0.08);
+  --whatif-muted: #858585;
+  --whatif-pointer-x: 50vw;
+  --whatif-pointer-y: 50vh;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  color: #fff;
+  background: #ff6b35;
+}
+
+/* --------------------------------
+   DARK MODE VARIABLES
+--------------------------------- */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #111111;
+  --foreground: #f5f5f5;
+  --whatif-surface: #1b1b1b;
+  --whatif-border: rgba(255, 255, 255, 0.1);
+  --whatif-muted: #aaa;
+}
+
+html[data-theme="dark"] body {
+  background: #111;
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] main#home {
+  background: #111 !important;
+  color: #f5f5f5 !important;
+}
+
+/* Automatic header logo switching */
+
+.whatif-logo-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .whatif-logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .whatif-logo-dark {
+  display: inline-flex;
+}
+
+/* Dark homepage backgrounds */
+
+html[data-theme="dark"] main#home section {
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] main#home section.bg-\[\#F5F5F3\],
+html[data-theme="dark"] main#home section.bg-\[\#F6F6F4\],
+html[data-theme="dark"] main#home section.bg-\[\#F7F7F5\] {
+  background-color: #151515 !important;
+}
+
+html[data-theme="dark"] main#home [class*="bg-white"] {
+  background-color: #202020;
+}
+
+html[data-theme="dark"] main#home [class*="bg-[#F5F5"],
+html[data-theme="dark"] main#home [class*="bg-[#F6F6"],
+html[data-theme="dark"] main#home [class*="bg-[#F7F7"],
+html[data-theme="dark"] main#home [class*="bg-[#F8F8"],
+html[data-theme="dark"] main#home [class*="bg-[#FAFA"] {
+  background-color: #202020 !important;
+}
+
+html[data-theme="dark"] main#home [class*="bg-[#FFF"] {
+  background-color: #30231e !important;
+}
+
+/* Dark borders */
+
+html[data-theme="dark"] main#home [class*="border-black"],
+html[data-theme="dark"] main#home [class*="border-[#D"],
+html[data-theme="dark"] main#home [class*="divide-black"] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Dark text: muted grey text becomes readable */
+
+html[data-theme="dark"] main#home [class*="text-[#171717]"],
+html[data-theme="dark"] main#home [class*="text-[#222]"],
+html[data-theme="dark"] main#home [class*="text-[#252525]"],
+html[data-theme="dark"] main#home [class*="text-[#333]"],
+html[data-theme="dark"] main#home [class*="text-[#444]"],
+html[data-theme="dark"] main#home [class*="text-[#555]"],
+html[data-theme="dark"] main#home [class*="text-[#666]"] {
+  color: #eeeeee !important;
+}
+
+html[data-theme="dark"] main#home [class*="text-[#777]"],
+html[data-theme="dark"] main#home [class*="text-[#888]"],
+html[data-theme="dark"] main#home [class*="text-[#929"],
+html[data-theme="dark"] main#home [class*="text-[#969"],
+html[data-theme="dark"] main#home [class*="text-[#858"],
+html[data-theme="dark"] main#home [class*="text-[#999]"],
+html[data-theme="dark"] main#home [class*="text-[#A0"],
+html[data-theme="dark"] main#home [class*="text-[#AAA"],
+html[data-theme="dark"] main#home [class*="text-[#B5"] {
+  color: #bcbcbc !important;
+}
+
+/* Preserve orange brand accents */
+
+html[data-theme="dark"] main#home [class*="text-[#FF6B35]"],
+html[data-theme="dark"] main#home [class*="text-[#F06B39]"],
+html[data-theme="dark"] main#home [class*="text-[#E96535]"],
+html[data-theme="dark"] main#home [class*="text-[#D95B31]"],
+html[data-theme="dark"] main#home [class*="text-[#F36B39]"] {
+  color: #ff9068 !important;
+}
+
+/* Header */
+
+html[data-theme="dark"] main#home header nav {
+  background: rgba(25, 25, 25, 0.94);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] main#home header nav a {
+  color: #eeeeee;
+}
+
+html[data-theme="dark"] main#home header nav a[href="#start"] {
+  color: #fff;
+}
+
+html[data-theme="dark"] main#home header nav a:hover {
+  color: #ff9068;
+}
+
+html[data-theme="dark"] main#home header nav div.rounded-full {
+  background: #292929;
+}
+
+html[data-theme="dark"] main#home header > div {
+  background: #202020;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] main#home header button {
+  color: #f5f5f5;
+}
+
+/* Form controls */
+
+html[data-theme="dark"] main#home textarea,
+html[data-theme="dark"] main#home input {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: #202020;
+  color: #fff;
+}
+
+html[data-theme="dark"] main#home textarea::placeholder,
+html[data-theme="dark"] main#home input::placeholder {
+  color: #858585;
+}
+
+html[data-theme="dark"] main#home textarea:focus,
+html[data-theme="dark"] main#home input:focus {
+  border-color: #ff6b35;
+}
+
+/* Keep dark feature section and footer balanced */
+
+html[data-theme="dark"] main#home #features {
+  background: #171717 !important;
+  color: #fff !important;
+}
+
+html[data-theme="dark"] main#home footer {
+  background: #090909 !important;
+  color: #fff !important;
+}
+
+html[data-theme="dark"] main#home footer a {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+html[data-theme="dark"] main#home footer a:hover {
+  color: #fff;
+}
+
+/* --------------------------------
+   SCROLL PROGRESS
+--------------------------------- */
+
+.whatif-scroll-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 1000;
+  height: 3px;
+  background: var(--whatif-orange);
+  box-shadow: 0 0 12px rgba(255, 107, 53, 0.35);
+  transition: width 80ms linear;
+}
+
+/* --------------------------------
+   CURSOR SPOTLIGHT
+--------------------------------- */
+
+.whatif-cursor-glow {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background: radial-gradient(
+    380px circle at var(--whatif-pointer-x) var(--whatif-pointer-y),
+    rgba(255, 107, 53, 0.13),
+    transparent 72%
+  );
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .whatif-cursor-glow {
+    display: none;
+  }
+}
+
+/* --------------------------------
+   FLOATING TOOLS
+--------------------------------- */
+
+.whatif-floating-tools {
+  position: fixed;
+  z-index: 90;
+  right: 18px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.whatif-tool-button,
+.whatif-back-top {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.93);
+  color: #171717;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.09);
+  backdrop-filter: blur(15px);
+  font-size: 19px;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.whatif-tool-button:hover,
+.whatif-back-top:hover {
+  transform: translateY(-3px);
+  background: #ff6b35;
+  color: white;
+}
+
+.whatif-tool-button.is-active {
+  background: #ff6b35;
+  color: white;
+}
+
+html[data-theme="dark"] .whatif-tool-button,
+html[data-theme="dark"] .whatif-back-top {
+  background: #242424;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+.whatif-back-top {
+  position: fixed;
+  z-index: 90;
+  right: 18px;
+  bottom: 184px;
+  font-size: 22px;
+}
+
+/* --------------------------------
+   TOAST
+--------------------------------- */
+
+.whatif-toast {
+  position: fixed;
+  z-index: 200;
+  right: 76px;
+  bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(360px, calc(100vw - 100px));
+  padding: 14px 17px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  background: #191919;
+  color: white;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  animation: whatif-toast-in 220ms ease both;
+}
+
+.whatif-toast-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #ff9068;
+}
+
+@keyframes whatif-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------
+   COMMAND PALETTE
+--------------------------------- */
+
+.whatif-palette-overlay,
+.whatif-easter-egg {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  display: grid;
+  place-items: start center;
+  padding: 15vh 18px 20px;
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(7px);
+}
+
+.whatif-palette {
+  width: min(570px, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 19px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.25);
+  animation: whatif-palette-in 180ms ease both;
+}
+
+@keyframes whatif-palette-in {
+  from {
+    opacity: 0;
+    transform: translateY(-9px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.whatif-palette-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  border-bottom: 1px solid #eee;
+  font-size: 20px;
+}
+
+.whatif-palette-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #171717;
+  font-size: 14px;
+}
+
+.whatif-palette kbd {
+  padding: 4px 7px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  color: #888;
+  font-size: 10px;
+}
+
+.whatif-palette-label {
+  padding: 15px 18px 8px;
+  color: #999;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.whatif-palette-results {
+  padding: 0 8px 10px;
+}
+
+.whatif-palette-results button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 9px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.whatif-palette-results button:hover {
+  background: #fff0e9;
+}
+
+.whatif-empty {
+  padding: 18px 12px;
+  color: #888;
+  font-size: 12px;
+}
+
+.whatif-palette-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 17px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 9px;
+}
+
+html[data-theme="dark"] .whatif-palette {
+  background: #1b1b1b;
+  color: #f5f5f5;
+  border-color: #333;
+}
+
+html[data-theme="dark"] .whatif-palette-search {
+  border-color: #333;
+}
+
+html[data-theme="dark"] .whatif-palette-search input {
+  background: transparent;
+  color: white;
+}
+
+html[data-theme="dark"] .whatif-palette-results button {
+  color: #eee;
+}
+
+html[data-theme="dark"] .whatif-palette-results button:hover {
+  background: #30231e;
+}
+
+/* --------------------------------
+   EASTER EGG
+--------------------------------- */
+
+.whatif-easter-egg {
+  z-index: 400;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.whatif-easter-egg > div {
+  width: min(440px, 100%);
+  padding: 42px 28px;
+  border-radius: 25px;
+  background: white;
+  color: #171717;
+}
+
+.whatif-easter-icon {
+  display: inline-grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 18px;
+  background: #fff0e9;
+  color: #ff6b35;
+  font-size: 28px;
+}
+
+.whatif-easter-egg h2 {
+  margin: 12px 0;
+  font-size: 27px;
+  letter-spacing: -0.06em;
+}
+
+.whatif-easter-egg p:not(.whatif-eyebrow) {
+  margin-bottom: 22px;
+  color: #888;
+  font-size: 13px;
+}
+
+html[data-theme="dark"] .whatif-easter-egg > div {
+  background: #202020;
+  color: #f5f5f5;
+}
+
+/* --------------------------------
+   INTERACTIVE LAB
+--------------------------------- */
+
+.whatif-lab {
+  position: relative;
+  z-index: 1;
+  padding: 105px 22px;
+  background: #f7f7f5;
+  color: #171717;
+}
+
+.whatif-lab-inner {
+  width: min(1250px, 100%);
+  margin: 0 auto;
+}
+
+.whatif-lab-heading {
+  max-width: 650px;
+  margin-bottom: 45px;
+}
+
+.whatif-eyebrow {
+  color: #e96535;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.whatif-lab-heading h2 {
+  margin-top: 15px;
+  font-size: clamp(38px, 6vw, 67px);
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  line-height: 1;
+}
+
+.whatif-lab-heading > p:last-child {
+  margin-top: 17px;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.whatif-lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.whatif-lab-card {
+  min-width: 0;
+  padding: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 21px;
+  background: white;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.025);
+}
+
+.whatif-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 23px;
+}
+
+.whatif-card-heading h3 {
+  margin-top: 8px;
+  font-size: 21px;
+  font-weight: 550;
+  letter-spacing: -0.05em;
+}
+
+.whatif-status {
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  border-radius: 30px;
+  background: #fff0e9;
+  color: #d95b31;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.whatif-card-note {
+  margin-top: 15px;
+  color: #999;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* Terminal */
+
+.whatif-terminal {
+  overflow: hidden;
+  border-radius: 13px;
+  background: #171717;
+  color: #f4f4f4;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+}
+
+.whatif-terminal-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.whatif-terminal-top > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff6b35;
+}
+
+.whatif-terminal-top > span:nth-child(2) {
+  background: #e8bd58;
+}
+
+.whatif-terminal-top > span:nth-child(3) {
+  background: #61b879;
+}
+
+.whatif-terminal-top small {
+  margin-left: auto;
+  color: #777;
+  font-size: 9px;
+}
+
+.whatif-terminal-content {
+  min-height: 140px;
+  max-height: 185px;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+.whatif-terminal-content p {
+  margin-bottom: 9px;
+  overflow-wrap: anywhere;
+  color: #b9c5b9;
+  line-height: 1.65;
+}
+
+.whatif-terminal-content p.terminal-command {
+  color: #ff9068;
+}
+
+.whatif-terminal-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #333;
+}
+
+.whatif-terminal-form label {
+  flex: 0 0 auto;
+  color: #ff9068;
+  font-size: 9px;
+}
+
+.whatif-terminal-form input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.whatif-terminal-form button {
+  color: #ff9068;
+  font-size: 17px;
+}
+
+/* Code switcher */
+
+.whatif-code-tabs {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.whatif-code-tabs button {
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #f3f3f3;
+  color: #777;
+  font-size: 10px;
+}
+
+.whatif-code-tabs button.active {
+  background: #fff0e9;
+  color: #d95b31;
+  font-weight: 700;
+}
+
+.whatif-code-block {
+  min-height: 205px;
+  overflow: auto;
+  padding: 17px;
+  border-radius: 12px;
+  background: #171717;
+  color: #e9e9e9;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  line-height: 1.85;
+  white-space: pre;
+}
+
+/* Before and after slider */
+
+.whatif-comparison {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  border-radius: 13px;
+  background: #f4f4f2;
+}
+
+.whatif-comparison-before,
+.whatif-comparison-after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  padding: 20px;
+  text-align: center;
+}
+
+.whatif-comparison-before {
+  background: #eeeeeb;
+}
+
+.whatif-comparison-after {
+  z-index: 2;
+  background: #fff0e9;
+}
+
+.whatif-comparison-before > span,
+.whatif-comparison-after > span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.comparison-lines {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comparison-lines i {
+  display: block;
+  height: 9px;
+  border-radius: 10px;
+  background: #c9c9c5;
+}
+
+.comparison-lines i:nth-child(2) {
+  width: 65%;
+}
+
+.comparison-lines i:nth-child(3) {
+  width: 85%;
+}
+
+.comparison-lines i:nth-child(4) {
+  width: 50%;
+}
+
+.whatif-comparison-before p,
+.whatif-comparison-after p {
+  color: #777;
+  font-size: 10px;
+}
+
+.comparison-nodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.comparison-nodes > b,
+.comparison-nodes div b {
+  padding: 8px 12px;
+  border: 1px solid #f1a486;
+  border-radius: 7px;
+  background: white;
+  font-size: 9px;
+}
+
+.comparison-nodes > i {
+  width: 1px;
+  height: 12px;
+  background: #ed9a78;
+}
+
+.comparison-nodes div {
+  display: flex;
+  gap: 12px;
+}
+
+.whatif-comparison-divider {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ff6b35;
+  pointer-events: none;
+}
+
+.whatif-comparison-divider::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: #ff6b35;
+  color: white;
+  content: "↔";
+  transform: translate(-50%, -50%);
+}
+
+.whatif-slider-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  color: #888;
+  font-size: 10px;
+}
+
+.whatif-slider-label input {
+  width: 100%;
+  accent-color: #ff6b35;
+}
+
+/* Local clock */
+
+.whatif-clock {
+  padding: 20px;
+  border-radius: 13px;
+  background: #f7f7f5;
+  text-align: center;
+}
+
+.whatif-clock-icon {
+  display: block;
+  color: #ff6b35;
+  font-size: 25px;
+}
+
+.whatif-clock strong {
+  display: block;
+  margin-top: 9px;
+  font-size: clamp(27px, 5vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.whatif-clock p {
+  margin-top: 6px;
+  color: #888;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.whatif-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 13px;
+  color: #555;
+  font-size: 11px;
+}
+
+.whatif-availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #35a66a;
+  box-shadow: 0 0 0 4px rgba(53, 166, 106, 0.1);
+}
+
+/* Counters */
+
+.whatif-counter {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 17px 0;
+}
+
+.whatif-counter strong {
+  color: #ff6b35;
+  font-size: 65px;
+  font-weight: 500;
+  letter-spacing: -0.08em;
+}
+
+.whatif-counter span {
+  max-width: 160px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.whatif-counter-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.whatif-counter-steps span {
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: #f5f5f3;
+  color: #777;
+  font-size: 9px;
+}
+
+/* Scramble and copy */
+
+.whatif-scramble {
+  display: grid;
+  min-height: 130px;
+  place-items: center;
+  overflow-wrap: anywhere;
+  color: #171717;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(17px, 3vw, 25px);
+  letter-spacing: -0.06em;
+  text-align: center;
+}
+
+.whatif-copy-description {
+  margin-bottom: 20px;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.whatif-copy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.whatif-primary-button,
+.whatif-copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: #ff6b35;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.whatif-primary-button:hover,
+.whatif-copy-button:hover {
+  transform: translateY(-2px);
+  background: #e85e2d;
+}
+
+.whatif-copy-button {
+  border-color: #e8e8e8;
+  background: white;
+  color: #555;
+}
+
+.whatif-copy-button:hover {
+  border-color: #ff6b35;
+  background: #fff6f1;
+  color: #d95b31;
+}
+
+/* Reading progress */
+
+.whatif-reading-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #eee;
+}
+
+.whatif-reading-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #ff6b35;
+  transition: width 100ms linear;
+}
+
+.whatif-reading-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.whatif-reading-links button {
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: #f4f4f2;
+  color: #777;
+  font-size: 10px;
+}
+
+.whatif-reading-links button:hover {
+  background: #fff0e9;
+  color: #d95b31;
+}
+
+.whatif-lab-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.whatif-lab-footer p {
+  color: #999;
+  font-size: 10px;
+}
+
+/* Reveal animations */
+
+[data-whatif-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+[data-whatif-reveal].whatif-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover interactions */
+
+@media (hover: hover) and (pointer: fine) {
+  .whatif-lab-card {
+    transition:
+      transform 250ms ease,
+      box-shadow 250ms ease;
+  }
+
+  .whatif-lab-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.07);
+  }
+
+  main#home a[href="#start"],
+  main#home button {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  main#home a[href="#start"]:hover,
+  main#home button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* --------------------------------
+   COMPLETE DARK MODE: INTERACTIVE LAB
+--------------------------------- */
+
+html[data-theme="dark"] .whatif-lab {
+  background: #141414;
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] .whatif-lab-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #202020;
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] .whatif-lab-card h3,
+html[data-theme="dark"] .whatif-lab-card label,
+html[data-theme="dark"] .whatif-lab-card strong,
+html[data-theme="dark"] .whatif-scramble {
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] .whatif-lab-card p,
+html[data-theme="dark"] .whatif-card-note,
+html[data-theme="dark"] .whatif-lab-heading > p:last-child,
+html[data-theme="dark"] .whatif-copy-description,
+html[data-theme="dark"] .whatif-counter span {
+  color: #b8b8b8;
+}
+
+html[data-theme="dark"] .whatif-clock,
+html[data-theme="dark"] .whatif-counter-steps span,
+html[data-theme="dark"] .whatif-reading-links button,
+html[data-theme="dark"] .whatif-code-tabs button {
+  background: #292929;
+  color: #ddd;
+}
+
+html[data-theme="dark"] .whatif-code-tabs button.active {
+  background: #39271f;
+  color: #ff9068;
+}
+
+html[data-theme="dark"] .whatif-copy-button {
+  border-color: #444;
+  background: #292929;
+  color: #eee;
+}
+
+html[data-theme="dark"] .whatif-copy-button:hover {
+  background: #39271f;
+}
+
+html[data-theme="dark"] .whatif-comparison {
+  border-color: #444;
+  background: #222;
+}
+
+html[data-theme="dark"] .whatif-comparison-before {
+  background: #292929;
+}
+
+html[data-theme="dark"] .whatif-comparison-after {
+  background: #39271f;
+}
+
+html[data-theme="dark"] .whatif-comparison-before p,
+html[data-theme="dark"] .whatif-comparison-after p {
+  color: #ccc;
+}
+
+html[data-theme="dark"] .whatif-comparison-before > span,
+html[data-theme="dark"] .whatif-comparison-after > span {
+  color: #eee;
+}
+
+html[data-theme="dark"] .whatif-reading-track {
+  background: #333;
+}
+
+html[data-theme="dark"] .whatif-availability {
+  color: #ddd;
+}
+
+html[data-theme="dark"] .whatif-lab-footer p {
+  color: #aaa;
+}
+
+html[data-theme="dark"] .whatif-terminal,
+html[data-theme="dark"] .whatif-code-block {
+  background: #101010;
+}
+
+html[data-theme="dark"] .whatif-terminal-form input {
+  color: white;
+}
+
+/* --------------------------------
+   RESPONSIVE
+--------------------------------- */
+
+@media (max-width: 760px) {
+  .whatif-lab {
+    padding: 75px 16px;
+  }
+
+  .whatif-lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .whatif-lab-card {
+    padding: 20px;
+  }
+
+  .whatif-floating-tools {
+    right: 10px;
+    bottom: 12px;
+    gap: 7px;
+  }
+
+  .whatif-tool-button,
+  .whatif-back-top {
+    width: 39px;
+    height: 39px;
+    border-radius: 13px;
+  }
+
+  .whatif-back-top {
+    right: 10px;
+    bottom: 157px;
+  }
+
+  .whatif-toast {
+    right: 60px;
+    bottom: 15px;
+    font-size: 10px;
+  }
+
+  .whatif-lab-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .whatif-palette-footer {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-whatif-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* Refined WhatIf navigation, floating controls, and product capability section */
+main#home header { z-index: 100 !important; }
+.whatif-floating-tools {
+  position: fixed !important; z-index: 120 !important; right: 20px; bottom: 22px;
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 0 !important; margin: 0 !important; border: 0 !important;
+  border-radius: 0 !important; background: transparent !important; box-shadow: none !important;
+  pointer-events: none;
+}
+.whatif-tool-button, .whatif-back-top {
+  pointer-events: auto; display: grid; place-items: center; width: 44px; height: 44px;
+  border: 1px solid rgba(23,23,23,.10); border-radius: 14px;
+  background: rgba(255,255,255,.96); color: #262626;
+  box-shadow: 0 4px 18px rgba(0,0,0,.10); backdrop-filter: blur(16px);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+}
+.whatif-tool-button:hover, .whatif-back-top:hover {
+  transform: translateY(-2px); border-color: rgba(255,107,53,.4);
+  background: #fff5f0; color: #e96535;
+}
+.whatif-tool-button svg, .whatif-back-top svg { width: 19px; height: 19px; display: block; }
+.whatif-back-top { position: fixed; z-index: 120 !important; right: 20px; bottom: 80px; }
+html[data-theme="dark"] .whatif-tool-button,
+html[data-theme="dark"] .whatif-back-top {
+  background: rgba(36,36,36,.97); border-color: rgba(255,255,255,.14); color: #f5f5f5;
+  box-shadow: 0 4px 18px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] .whatif-tool-button:hover,
+html[data-theme="dark"] .whatif-back-top:hover { background: #33251f; color: #ff9a73; border-color: rgba(255,107,53,.4); }
+html[data-theme="dark"] main#home header nav div.rounded-full { background: transparent !important; }
+html[data-theme="dark"] main#home header nav a:not([href="#start"]) { color: #e8e8e8; }
+html[data-theme="dark"] main#home header nav a:not([href="#start"]):hover { background: rgba(255,255,255,.08); color: #fff; }
+html[data-theme="dark"] main#home header nav button { color: #f5f5f5; }
+.whatif-lab { padding: 100px 22px; background: #f7f7f5; color: #171717; }
+.whatif-lab-heading { max-width: 720px; margin: 0 0 42px; }
+.whatif-lab-heading h2 { margin-top: 14px; font-size: clamp(38px, 6vw, 66px); line-height: 1.02; letter-spacing: -.07em; font-weight: 500; }
+.whatif-lab-heading > p:last-child { margin-top: 16px; max-width: 620px; color: #777; font-size: 15px; line-height: 1.8; }
+.whatif-lab-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+.whatif-lab-card { min-width: 0; padding: 25px; border: 1px solid rgba(0,0,0,.07); border-radius: 20px; background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,.025); }
+.whatif-feature-topline { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.whatif-feature-icon { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; background:#fff0e9; color:#e96535; font-size:22px; }
+.whatif-feature-number { color:#aaa; font-size:10px; font-weight:700; letter-spacing:.12em; }
+.whatif-lab-card h3 { margin:0 0 10px; color:#171717; font-size:19px; font-weight:600; letter-spacing:-.04em; }
+.whatif-lab-card p { margin:0; color:#777; font-size:13px; line-height:1.8; }
+.whatif-lab-cta { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:18px; padding:30px; border-radius:20px; background:#191919; color:#fff; }
+.whatif-lab-cta h3 { margin-top:10px; max-width:570px; font-size:clamp(22px,3vw,32px); line-height:1.2; letter-spacing:-.05em; }
+.whatif-lab-cta a { display:inline-flex; flex:0 0 auto; align-items:center; gap:12px; padding:14px 18px; border-radius:12px; background:#ff6b35; color:white; font-size:12px; font-weight:700; transition:background .18s ease,transform .18s ease; }
+.whatif-lab-cta a:hover { background:#ed5d2b; transform:translateY(-2px); }
+html[data-theme="dark"] .whatif-lab { background:#141414; color:#f5f5f5; }
+html[data-theme="dark"] .whatif-lab-card { background:#202020; border-color:rgba(255,255,255,.1); }
+html[data-theme="dark"] .whatif-lab-card h3 { color:#f5f5f5; }
+html[data-theme="dark"] .whatif-lab-card p, html[data-theme="dark"] .whatif-lab-heading > p:last-child { color:#b8b8b8; }
+html[data-theme="dark"] .whatif-feature-icon { background:#33251f; color:#ff9a73; }
+html[data-theme="dark"] .whatif-lab-cta { background:#202020; border:1px solid rgba(255,255,255,.1); }
+@media (max-width: 900px) { .whatif-lab-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 640px) {
+  .whatif-lab { padding:72px 16px; }
+  .whatif-lab-grid { grid-template-columns:1fr; }
+  .whatif-lab-card { padding:22px; }
+  .whatif-lab-cta { align-items:flex-start; flex-direction:column; padding:24px; }
+  .whatif-floating-tools { right:12px; bottom:14px; }
+  .whatif-tool-button, .whatif-back-top { width:42px; height:42px; }
+  .whatif-back-top { right:12px; bottom:68px; }
+}
+
+
+/* Real loading skeleton used while the decision graph is generated */
+.whatif-loading-shimmer {
+  background: linear-gradient(100deg,#e9e9e7 25%,#f5f5f3 45%,#e9e9e7 65%);
+  background-size:200% 100%; animation:whatif-loading-shimmer 1.35s ease-in-out infinite;
+}
+@keyframes whatif-loading-shimmer { to { background-position:-200% 0; } }
+html[data-theme="dark"] .whatif-loading-shimmer {
+  background:linear-gradient(100deg,#343434 25%,#484848 45%,#343434 65%); background-size:200% 100%;
+}
+@media (prefers-reduced-motion:reduce) { .whatif-loading-shimmer { animation:none; } }
+
+
+/* Shared navigation theme and mobile contrast */
+.whatif-header-logo-dark { display: none; }
+.whatif-header-link { color: #555; }
+.whatif-header-link:hover { color: #171717; }
+.whatif-header-menu-button { color: #171717; }
+.whatif-mobile-link { color: #292929; }
+html[data-theme="dark"] .whatif-site-nav {
+  border-color: rgba(255,255,255,.1);
+  background: rgba(25,25,25,.92);
+  box-shadow: 0 8px 35px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] .whatif-header-logo-light { display: none; }
+html[data-theme="dark"] .whatif-header-logo-dark { display: inline-flex; }
+html[data-theme="dark"] .whatif-header-link { color: #d4d4d4; }
+html[data-theme="dark"] .whatif-header-link:hover { color: #fff; background: rgba(255,255,255,.08); }
+html[data-theme="dark"] .whatif-header-menu-button { color: #f5f5f5; }
+html[data-theme="dark"] .whatif-mobile-menu { border-color: rgba(255,255,255,.1); background: #1b1b1b; }
+html[data-theme="dark"] .whatif-mobile-link { color: #eee; border-color: rgba(255,255,255,.1); }

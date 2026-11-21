@@ -1,0 +1,680 @@
+
+/* =========================================
+   WHATIF CHATBOT
+   Black Logo + Orange Background
+   Bottom-left positioning on all screens
+========================================= */
+
+.whatif-chat-launcher,
+.whatif-chat-window,
+.whatif-chat-window * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   FLOATING CHATBOT LAUNCHER
+========================================= */
+
+.whatif-chat-launcher {
+  position: fixed;
+  left: 26px;
+  right: auto;
+  bottom: 26px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-height: 62px;
+  padding: 9px 20px 9px 10px;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+
+  background: #ff6b35;
+  color: #171717;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 35px rgba(255, 107, 53, 0.28),
+    0 3px 10px rgba(0, 0, 0, 0.1);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.whatif-chat-launcher:hover {
+  transform: translateY(-3px);
+  background: #ff7847;
+
+  box-shadow:
+    0 14px 40px rgba(255, 107, 53, 0.35),
+    0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+.whatif-chat-launcher:focus-visible {
+  outline: 3px solid rgba(255, 107, 53, 0.35);
+  outline-offset: 4px;
+}
+
+.whatif-launcher-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: #ff6b35;
+}
+
+.whatif-launcher-logo img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.whatif-launcher-label {
+  white-space: nowrap;
+}
+
+/* =========================================
+   CHAT WINDOW
+========================================= */
+
+.whatif-chat-window {
+  position: fixed;
+  left: 26px;
+  right: auto;
+  bottom: 26px;
+  z-index: 10000;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 390px;
+  height: min(640px, calc(100dvh - 52px));
+
+  overflow: hidden;
+
+  border: 1px solid rgba(20, 20, 20, 0.1);
+  border-radius: 22px;
+
+  background: #ffffff;
+  font-family: inherit;
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.2),
+    0 5px 20px rgba(0, 0, 0, 0.07);
+
+  animation: whatif-chat-enter 220ms ease-out;
+}
+
+@keyframes whatif-chat-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.whatif-chat-header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 82px;
+  padding: 15px 17px;
+
+  background: #ff6b35;
+  color: #171717;
+}
+
+.whatif-chat-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.whatif-chat-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+  background: #ff6b35;
+}
+
+.whatif-chat-brand-logo img {
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.whatif-chat-brand-info {
+  min-width: 0;
+}
+
+.whatif-chat-brand-info h2 {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+}
+
+.whatif-chat-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 4px;
+
+  color: rgba(23, 23, 23, 0.75);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.whatif-status-dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: #171717;
+}
+
+.whatif-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.whatif-chat-header-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border: 1px solid rgba(23, 23, 23, 0.16);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.18);
+  color: #171717;
+
+  cursor: pointer;
+
+  transition: background 150ms ease;
+}
+
+.whatif-chat-header-button:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.whatif-chat-header-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================================
+   MESSAGE AREA
+========================================= */
+
+.whatif-chat-messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+
+  min-height: 0;
+  padding: 22px 17px 18px;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  background: #ffffff;
+}
+
+.whatif-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.whatif-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.whatif-chat-messages::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #e5e5e5;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.whatif-chat-intro {
+  padding: 17px;
+
+  border: 1px solid #f0f0f0;
+  border-radius: 15px;
+
+  background: #fafafa;
+}
+
+.whatif-chat-intro-label {
+  display: inline-block;
+
+  color: #ff6b35;
+
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.3px;
+}
+
+.whatif-chat-intro h3 {
+  margin: 9px 0 7px;
+
+  color: #171717;
+
+  font-size: 25px;
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -1px;
+}
+
+.whatif-chat-intro p {
+  margin: 0;
+
+  color: #737373;
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+/* =========================================
+   CHAT MESSAGE ROWS
+========================================= */
+
+.whatif-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  width: 100%;
+}
+
+.whatif-message-assistant-row {
+  justify-content: flex-start;
+}
+
+.whatif-message-user-row {
+  justify-content: flex-end;
+}
+
+.whatif-message-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+  background: #ff6b35;
+}
+
+.whatif-message-avatar img {
+  display: block;
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+
+.whatif-message-bubble {
+  max-width: 82%;
+  padding: 12px 14px;
+
+  border-radius: 15px;
+
+  font-size: 13px;
+  line-height: 1.65;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.whatif-assistant-bubble {
+  border: 1px solid #ededed;
+  border-bottom-left-radius: 5px;
+
+  background: #f7f7f7;
+  color: #292929;
+}
+
+.whatif-user-bubble {
+  border-bottom-right-radius: 5px;
+
+  background: #ff6b35;
+  color: #171717;
+
+  font-weight: 550;
+}
+
+/* =========================================
+   QUICK SUGGESTIONS
+========================================= */
+
+.whatif-chat-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding-left: 38px;
+}
+
+.whatif-chat-suggestions > span {
+  margin-bottom: 2px;
+
+  color: #a0a0a0;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.whatif-chat-suggestions button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  width: 100%;
+  padding: 10px 12px;
+
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #353535;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.whatif-chat-suggestions button:hover:not(:disabled) {
+  transform: translateX(2px);
+  border-color: #ff6b35;
+  background: #fff8f5;
+}
+
+.whatif-chat-suggestions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.whatif-chat-suggestions button span {
+  color: #ff6b35;
+  font-size: 15px;
+}
+
+/* =========================================
+   TYPING INDICATOR
+========================================= */
+
+.whatif-typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  min-width: 58px;
+  padding: 14px;
+
+  border: 1px solid #ededed;
+  border-radius: 14px;
+  border-bottom-left-radius: 5px;
+
+  background: #f7f7f7;
+}
+
+.whatif-typing-bubble span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: #ff6b35;
+
+  animation: whatif-typing 1s infinite ease-in-out;
+}
+
+.whatif-typing-bubble span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.whatif-typing-bubble span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes whatif-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* =========================================
+   INPUT AREA
+========================================= */
+
+.whatif-chat-bottom {
+  flex-shrink: 0;
+
+  padding: 13px 15px 11px;
+
+  border-top: 1px solid #eeeeee;
+
+  background: #ffffff;
+}
+
+.whatif-chat-form {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 48px;
+  padding: 5px 6px 5px 14px;
+
+  border: 1px solid #e7e7e7;
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  transition: border-color 150ms ease;
+}
+
+.whatif-chat-form:focus-within {
+  border-color: #ff6b35;
+}
+
+.whatif-chat-form input {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: #171717;
+
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.whatif-chat-form input::placeholder {
+  color: #a0a0a0;
+}
+
+.whatif-chat-form input:disabled {
+  opacity: 0.6;
+}
+
+.whatif-chat-form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ff6b35;
+  color: #171717;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.whatif-chat-form button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #ff7847;
+}
+
+.whatif-chat-form button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.whatif-chat-form button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.whatif-chat-disclaimer {
+  margin: 9px 0 0;
+
+  color: #a0a0a0;
+
+  font-size: 9px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+   Bottom-left launcher and chat window
+========================================= */
+
+@media (max-width: 520px) {
+  .whatif-chat-window {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    width: calc(100vw - 20px);
+    height: min(680px, calc(100dvh - 20px));
+
+    border-radius: 19px;
+  }
+
+  .whatif-chat-launcher {
+    position: fixed;
+    left: 17px;
+    right: auto;
+    bottom: 17px;
+
+    min-height: 57px;
+    padding-right: 17px;
+  }
+
+  .whatif-chat-header {
+    min-height: 76px;
+    padding: 12px 13px;
+  }
+
+  .whatif-chat-messages {
+    padding: 17px 13px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .whatif-chat-window,
+  .whatif-chat-window *,
+  .whatif-chat-launcher {
+    animation: none !important;
+    transition: none !important;
+  }
+}
